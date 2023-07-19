@@ -32,7 +32,6 @@ def is_empty_string(value):
     
 def create_record(df, name, age, job, sex):
     try:
-        # Validate input to ensure all fields are provided
         while is_empty_string(name) or not isinstance(age, int) or is_empty_string(job) or is_empty_string(sex):
             print("Todos os campos são obrigatórios. Por favor, insira valores válidos.")
             name = input("Digite o nome: ")
