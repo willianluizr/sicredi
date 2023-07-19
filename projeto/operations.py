@@ -22,7 +22,7 @@ def save_to_txt(df, input_data, output_data, filtered_name):
             formatted_data = f"Não há dados para o nome '{filtered_name}'."
         with open(output_data, 'w', encoding='utf-8') as txt_file:
             txt_file.write(formatted_data)
-        df.loc[df['nome'].str.lower().str.strip() == lower_filtered_name, 'status'] = 'OK'
+        df.loc[df['nome'].str.lower().str.strip() == lower_filtered_name, 'status'] = 'Importado'
         df.to_excel(input_data, index=False)
     except Exception as e:
         print(f"Erro ao salvar os dados: {e}")
@@ -67,6 +67,7 @@ def update_record_by_id(df, id, new_name):
             print(f"Erro ao atualizar o registro: O ID {id} não existe.")
             return df
         df.loc[df['id'] == id, 'nome'] = new_name
+        df.loc[df['id'] == id, 'status'] = 'Updated'
         return df
     except Exception as e:
         print(f"Erro ao atualizar o registro: {e}")
