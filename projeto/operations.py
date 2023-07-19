@@ -26,16 +26,31 @@ def save_to_txt(df, input_data, output_data, filtered_name):
         df.to_excel(input_data, index=False)
     except Exception as e:
         print(f"Erro ao salvar os dados: {e}")
+ 
+def is_empty_string(value):
+    return value.strip() == ""
     
 def create_record(df, name, age, job, sex):
     try:
+        # Validate input to ensure all fields are provided
+        while is_empty_string(name) or not isinstance(age, int) or is_empty_string(job) or is_empty_string(sex):
+            print("Todos os campos são obrigatórios. Por favor, insira valores válidos.")
+            name = input("Digite o nome: ")
+            age = input("Digite a idade: ")
+            job = input("Digite a profissão: ")
+            sex = input("Digite o sexo: ")
+            try:
+                age = int(age)
+            except ValueError:
+                age = None
+
         if 'id' not in df.columns:
             df['id'] = range(1, len(df) + 1) if not df.empty else [1]
         max_id = df['id'].max() if not df.empty else 0
         new_id = max_id + 1
         new_record = {'id': new_id, 'nome': name, 'idade': age, 'profissao': job, 'sexo': sex, 'status': 'Created'}
         df = pd.concat([df, pd.DataFrame([new_record])], ignore_index=True)
-        return df 
+        return df
     except Exception as e:
         print(f"Erro ao criar o registro: {e}")
         return None
