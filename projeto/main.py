@@ -39,9 +39,13 @@ if __name__ == "__main__":
 
             elif choice == "3":
                 id_to_delete = int(input("Digite o ID do registro a ser excluído: "))
+                df_before_delete = df.copy()
                 df = delete_record(df, id_to_delete)
-                df.to_excel(input_data, index=False)
-                print(f"Registro com ID {id_to_delete} excluído com sucesso!")
+                if df.equals(df_before_delete):
+                    print(f"O registro com ID {id_to_delete} não existe ou não pode ser modificado.")
+                else:
+                    df.to_excel(input_data, index=False)
+                    print(f"Registro com ID {id_to_delete} excluído com sucesso!")
                 
             elif choice == "4":
                 filtered_name = input("Digite o nome que deseja filtrar: ")
