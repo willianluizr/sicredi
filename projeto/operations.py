@@ -61,7 +61,7 @@ def update_record_by_id(df, id, new_name):
 def delete_record(df, id):
     try:
         if id not in df['id'].values:
-            print(f"Erro ao excluir o registro: O ID {id} não existe.")
+            print(f"Erro ao excluir o registro com o ID {id}!")
             return df
         df = df[df['id'] != id]
         return df
