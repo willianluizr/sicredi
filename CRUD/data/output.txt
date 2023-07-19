@@ -1,2 +1,0 @@
- id  nome  idade  profissao     sexo
-  3 Alana     35 Professora Feminino
